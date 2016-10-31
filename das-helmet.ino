@@ -107,9 +107,9 @@ void loop() {
     if (lightMode == 0) {
       pulse(red, green, blue, 255, 2, 250, 100);
     } else if (lightMode == 1) {
-      rotate(red, green, blue, 40, 10, 5);
+      rotate(red, green, blue, 40, 20, 5);
     } else if (lightMode == 2) {
-      rotateDark(red, green, blue, 20, 10, 5);
+      rotateDark(red, green, blue, 20, 20, 5);
     } else {
       rainbowCycle(10);
     }
@@ -168,17 +168,17 @@ void initBLE() {
     error(F("Could not add service"));
   }
 
-  success = ble.sendCommandWithIntReply( F("AT+GATTADDCHAR=UUID=0xFF12, PROPERTIES=0x08, MIN_LEN=1, MAX_LEN=1, VALUE=150"), &lightIntensityCharId);
+  success = ble.sendCommandWithIntReply( F("AT+GATTADDCHAR=UUID=0xFF11, PROPERTIES=0x08, MIN_LEN=1, MAX_LEN=1, VALUE=150"), &lightIntensityCharId);
   if (! success) {
     error(F("Could not add characteristic"));
   }
 
-  success = ble.sendCommandWithIntReply( F("AT+GATTADDCHAR=UUID=0xFF13, PROPERTIES=0x08, MIN_LEN=3, MAX_LEN=3, VALUE=00-00-00"), &lightColorCharId);
+  success = ble.sendCommandWithIntReply( F("AT+GATTADDCHAR=UUID=0xFF12, PROPERTIES=0x08, MIN_LEN=3, MAX_LEN=3, VALUE=00-00-00"), &lightColorCharId);
   if (! success) {
     error(F("Could not add characteristic"));
   }
 
-  success = ble.sendCommandWithIntReply( F("AT+GATTADDCHAR=UUID=0xFF14, PROPERTIES=0x08, MIN_LEN=1, MAX_LEN=1, VALUE=0"), &lightModeCharId);
+  success = ble.sendCommandWithIntReply( F("AT+GATTADDCHAR=UUID=0xFF13, PROPERTIES=0x08, MIN_LEN=1, MAX_LEN=1, VALUE=0"), &lightModeCharId);
   if (! success) {
     error(F("Could not add characteristic"));
   }
